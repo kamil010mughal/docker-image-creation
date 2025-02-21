@@ -2,15 +2,17 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "OWNER/REPO_NAME"   // Change to your GitHub package name
-        GITHUB_USER = "your-github-username"
-        GITHUB_TOKEN = credentials('github-token')  // Store GitHub token in Jenkins credentials
+        IMAGE_NAME = "kamil010mughal/docker-image-creation"  // Update with your GitHub package name
+        GITHUB_USER = "kamil010mughal"  // Your GitHub username
+        GITHUB_TOKEN = credentials('github-token')  // Use the correct credential ID
     }
 
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', url: 'https://github.com/YOUR_USERNAME/YOUR_REPO.git'
+                git branch: 'main', 
+                    credentialsId: 'github-token',  // Added credentials ID
+                    url: 'https://github.com/kamil010mughal/docker-image-creation.git'
             }
         }
 
