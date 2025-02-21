@@ -19,7 +19,9 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh 'docker build -t $IMAGE_NAME .'
+                    sh 'ls -l'  // List files to check if Dockerfile exists
+                    sh '[ -f Dockerfile ] || { echo "Dockerfile not found!"; exit 1; }'  // Check if Dockerfile exists
+                    sh 'docker build -t $IMAGE_NAME .'  // Build Docker image
                 }
             }
         }
